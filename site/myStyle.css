@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: url(images/MainBackground3.jpg) no-repeat center fixed;
+    background-size: cover;
+    font-size: 20px;
+}
+
+.main-body {
+    display: flexbox;
+    position: relative;
+    width: 20%;
+    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}
+
+.image-sizing {
+    display: flex;
+    justify-content: center;
+}
+.wrong-guesses {
+    display: flex;
+    padding: 0.1rem;
+    font-size: 1rem;
+    gap: 5px;
+    justify-content: center;
+}
+
+.box {
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border: 1px;
+    padding: 2px;
+}
+.label-box {
+    width: 3rem;
+    height: auto;
+    background-color: white;
+    text-align: center;
+    border: 1px;
+    padding: 2px;
+}
+
+.wrong-guess {
+    display: none;
+}
+
+.wrong-guess-pname {
+    width: 10rem;
+    background-color: white;    
+}
+
+#label-boxes {
+    display: none;
+}
+
+#player-card-img {
+    width: auto;
+    /* scale: 80%;  */
+}
+
+#guess-form {
+    display: flex;
+}
+
+#guess-box {
+    font-size: 1rem;
+    /* margin-left: 48px; */
+    margin-right: 56px;
+    text-align: right;
+    
+}
