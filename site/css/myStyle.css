@@ -5,7 +5,7 @@
 }
 
 html {
-    background: url(images/MainBackground.jpg) no-repeat center fixed;
+    background: url(/site/images/MainBackground.jpg) no-repeat center fixed;
     background-size: cover;
     font-family: 'Rubik', sans-serif;
     font-optical-sizing: auto;
@@ -78,19 +78,25 @@ html {
     padding: 2px;
 }
 
-.pname-box {
+.pname {
     width: 10rem;
     /* background-color: black; */
     text-align: center;
     color: white;
 }
 
-.wrong-guess {
+/* .wrong-guess {
     display: none;
+} */
+
+#header-logo-link {
+    font-size: 3rem;
+    color: white;
+    text-decoration-line: none;
 }
 
-#label-boxes {
-    display: none;
+#aria-autocomplete {
+    background-color: white;
 }
 
 #player-card-img {

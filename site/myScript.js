@@ -1,29 +1,53 @@
 let guessCounter = 0;
-let guessId = "wrong-guess";
-let guessPnameId = "wrong-guess-pname";
-let natBox ="nationality-box";
-let teamBox ="team-box";
-let posBox ="position-box";
-let ageBox ="age-box";
-let shirtBox ="shirt-num-box";
-document.getElementById("guess-submit").onclick = () =>  wrongGuess();
-function wrongGuess() {
-    // let div = document.createElement("div");
-    guessCounter++;
-    document.getElementById("label-boxes").style.display = "flex";
-    document.getElementById(guessId+guessCounter).style.display = "block";
-    document.getElementById(natBox+guessCounter).style.animationName = "boxFlipWrong";
-    document.getElementById(natBox+guessCounter).style.animationDelay = "0.5s";
-    document.getElementById(teamBox+guessCounter).style.animationName = "boxFlipWrong";
-    document.getElementById(teamBox+guessCounter).style.animationDelay = "1s";
-    document.getElementById(posBox+guessCounter).style.animationName = "boxFlipWrong";
-    document.getElementById(posBox+guessCounter).style.animationDelay = "1.5s";
-    document.getElementById(ageBox+guessCounter).style.animationName = "boxFlipWrong";
-    document.getElementById(ageBox+guessCounter).style.animationDelay = "2s";
-    document.getElementById(shirtBox+guessCounter).style.animationName = "boxFlipWrong";
-    document.getElementById(shirtBox+guessCounter).style.animationDelay = "2.5s";
-    document.getElementById(guessPnameId+guessCounter).innerHTML = document.forms["guess-form"]["guess"].value;
+const element = document.getElementById("guess-submit");
+element.addEventListener("click", (e) => {
+
+    const wrongGuesses = document.getElementById("wrong-guesses");
+    e.preventDefault();
+    console.log("working");
+    if (guessCounter === 0) {
+
+        const lbl = document.createElement("div");
+        lbl.className = "container";
+        const natlbl = document.createElement("div");
+        natlbl.className = "label-box"; natlbl.innerHTML = "אזרחות"
+        const teamlbl = document.createElement("div");
+        teamlbl.className = "label-box"; teamlbl.innerHTML = "קבוצה"
+        const poslbl = document.createElement("div");
+        poslbl.className = "label-box"; poslbl.innerHTML = "עמדה"
+        const agelbl = document.createElement("div");
+        agelbl.className = "label-box"; agelbl.innerHTML = "גיל"
+        const shirtlbl = document.createElement("div");
+        shirtlbl.className = "label-box"; shirtlbl.innerHTML = "חולצה"
+        lbl.append(natlbl, teamlbl, poslbl, agelbl, shirtlbl);
+        wrongGuesses.appendChild(lbl);
+    }
+    
+    const boxes = document.createElement("div");
+    boxes.className = "container";
+    const natBox = document.createElement("div");
+    natBox.className = "box"; natBox.style.animationName = "boxFlipWrong"; natBox.style.animationDelay = "0.2s";
+    const teamBox = document.createElement("div");
+    teamBox.className = "box"; teamBox.style.animationName = "boxFlipWrong"; teamBox.style.animationDelay = "0.7s";
+    const posBox = document.createElement("div");
+    posBox.className = "box"; posBox.style.animationName = "boxFlipWrong"; posBox.style.animationDelay = "1.2s";
+    const ageBox = document.createElement("div");
+    ageBox.className = "box"; ageBox.style.animationName = "boxFlipWrong"; ageBox.style.animationDelay = "1.7s";
+    const shirtBox = document.createElement("div");
+    shirtBox.className = "box"; shirtBox.style.animationName = "boxFlipWrong"; shirtBox.style.animationDelay = "2.2s";
+    boxes.append(natBox, teamBox, posBox, ageBox, shirtBox);
+    wrongGuesses.insertBefore(boxes, wrongGuesses.firstElementChild);
+   
+    const wrng = document.createElement("div");
+    wrng.className= "wrong-guess";
+    const cont = document.createElement("div");
+    cont.className= "container";
+    const pname = document.createElement("div");
+    pname.className= "pname"; pname.innerHTML= document.forms["guess-form"]["guess"].value;
+    cont.appendChild(pname); wrng.appendChild(cont); wrongGuesses.insertBefore(wrng, wrongGuesses.firstElementChild);
     document.getElementById("guess-box").value = "";
+    guessCounter++;
     document.getElementById("guess-box").placeholder = "ניחוש " + (guessCounter+1) + " מתוך 8";
-    return false;
 }
+);
+

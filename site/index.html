@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="en">
-
+    <!-- cd repo -->
+    <!-- browser-sync start --server --directory --files "*" -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="myStyle.css">
+    <link rel="stylesheet" href="/site/css/myStyle.css">
+    <link rel="stylesheet" href="/site/css/aria-autocomplete.css">
     <link rel="icon" type="image/x-icon" href="images/LigatHaAlLogo2.png">
     <script src="myScript.js" defer></script>
+    <script src="https://unpkg.com/aria-autocomplete"></script>
     <title>Site1</title>
 </head>
 
@@ -17,7 +20,8 @@
     <h1>
         <div id="logo" class="container">
             <a id="header-logo-link" href="http://localhost:3000/site/index.html">
-                <img id="header-logo" src="images/Header4.png" alt="Ligat HaAldle">
+                <!-- <img id="header-logo" src="images/Header4.png" alt="Ligat HaAldle"> -->
+                 נחש את השחקן
             </a>
         </div>
     </h1>
@@ -28,14 +32,15 @@
             </div>
             <form class="container" id="guess-form" autocomplete="off">
                 <input type="image" id="guess-submit" src="images/Submit.png" alt="Submit" width="48" height="48">
-                <div class="container autocomplete">
+                <div class="container list">
                     <input type="text" id="guess-box" name="guess" placeholder="ניחוש 1 מתוך 8">
                 </div>
             </form>
-            <div>
-                <div class="wrong-guess" id="wrong-guess8">
+            
+            <div class="guesses" id="wrong-guesses">
+                <!-- <div class="wrong-guess" id="wrong-guess8">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname8">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname8">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes8">
                         <div class="box" id="nationality-box8"></div>
@@ -47,7 +52,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess7">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname7">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname7">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes7">
                         <div class="box" id="nationality-box7"></div>
@@ -59,7 +64,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess6">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname6">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname6">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes6">
                         <div class="box" id="nationality-box6"></div>
@@ -71,7 +76,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess5">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname5">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname5">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes5">
                         <div class="box" id="nationality-box5"></div>
@@ -83,7 +88,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess4">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname4">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname4">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes4">
                         <div class="box" id="nationality-box4"></div>
@@ -95,7 +100,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess3">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname3">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname3">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes3">
                         <div class="box" id="nationality-box3"></div>
@@ -107,7 +112,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess2">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname2">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname2">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes2">
                         <div class="box" id="nationality-box2"></div>
@@ -119,7 +124,7 @@
                 </div>
                 <div class="wrong-guess" id="wrong-guess1">
                     <div class="container">
-                        <div class="pname-box" id="wrong-guess-pname1">שם השחקן </div>
+                        <div class="pname" id="wrong-guess-pname1">שם השחקן </div>
                     </div>
                     <div class="container" id="red-green-boxes1">
                         <div class="box" id="nationality-box1"></div>
@@ -135,7 +140,7 @@
                     <div class="label-box" id="position-label">עמדה</div>
                     <div class="label-box" id="age-label">גיל</div>
                     <div class="label-box" id="shirt-num-label">חולצה</div>
-                </div>
+                </div> -->
             </div>
 
         </div>
