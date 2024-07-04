@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
-    <!-- cd repo -->
-    <!-- browser-sync start --server --directory --files "*" -->
+<!-- cd repo -->
+<!-- browser-sync start --server --directory --files "*" -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
         <div id="logo" class="container">
             <a id="header-logo-link" href="http://localhost:3000/site/index.html">
                 <!-- <img id="header-logo" src="images/Header4.png" alt="Ligat HaAldle"> -->
-                 נחש את השחקן
+                נחש את השחקן
             </a>
         </div>
     </h1>
@@ -30,117 +31,16 @@
             <div class="image-sizing">
                 <img id="player-card-img" src="images/Mystery2.png" alt="Mystery player">
             </div>
-            <form class="container" id="guess-form" autocomplete="off">
-                <input type="image" id="guess-submit" src="images/Submit.png" alt="Submit" width="48" height="48">
-                <div class="container list">
-                    <input type="text" id="guess-box" name="guess" placeholder="ניחוש 1 מתוך 8">
-                </div>
-            </form>
-            
+            <!-- <div class="container" id="guess-form-wrapper"> -->
+                <form class="container" id="guess-form" autocomplete="off">
+                    <input type="image" id="guess-submit" src="images/Submit.png" alt="Submit" width="48" height="48">
+                    <div class="container" id="guess-box-wrapper">
+                        <input type="text" id="guess-box" name="guess" placeholder="ניחוש מס' 1">
+                    </div>
+                </form>
+            <!-- </div> -->
+
             <div class="guesses" id="wrong-guesses">
-                <!-- <div class="wrong-guess" id="wrong-guess8">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname8">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes8">
-                        <div class="box" id="nationality-box8"></div>
-                        <div class="box" id="team-box8"></div>
-                        <div class="box" id="position-box8"></div>
-                        <div class="box" id="age-box8"></div>
-                        <div class="box" id="shirt-num-box8"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess7">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname7">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes7">
-                        <div class="box" id="nationality-box7"></div>
-                        <div class="box" id="team-box7"></div>
-                        <div class="box" id="position-box7"></div>
-                        <div class="box" id="age-box7"></div>
-                        <div class="box" id="shirt-num-box7"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess6">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname6">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes6">
-                        <div class="box" id="nationality-box6"></div>
-                        <div class="box" id="team-box6"></div>
-                        <div class="box" id="position-box6"></div>
-                        <div class="box" id="age-box6"></div>
-                        <div class="box" id="shirt-num-box6"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess5">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname5">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes5">
-                        <div class="box" id="nationality-box5"></div>
-                        <div class="box" id="team-box5"></div>
-                        <div class="box" id="position-box5"></div>
-                        <div class="box" id="age-box5"></div>
-                        <div class="box" id="shirt-num-box5"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess4">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname4">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes4">
-                        <div class="box" id="nationality-box4"></div>
-                        <div class="box" id="team-box4"></div>
-                        <div class="box" id="position-box4"></div>
-                        <div class="box" id="age-box4"></div>
-                        <div class="box" id="shirt-num-box4"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess3">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname3">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes3">
-                        <div class="box" id="nationality-box3"></div>
-                        <div class="box" id="team-box3"></div>
-                        <div class="box" id="position-box3"></div>
-                        <div class="box" id="age-box3"></div>
-                        <div class="box" id="shirt-num-box3"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess2">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname2">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes2">
-                        <div class="box" id="nationality-box2"></div>
-                        <div class="box" id="team-box2"></div>
-                        <div class="box" id="position-box2"></div>
-                        <div class="box" id="age-box2"></div>
-                        <div class="box" id="shirt-num-box2"></div>
-                    </div>
-                </div>
-                <div class="wrong-guess" id="wrong-guess1">
-                    <div class="container">
-                        <div class="pname" id="wrong-guess-pname1">שם השחקן </div>
-                    </div>
-                    <div class="container" id="red-green-boxes1">
-                        <div class="box" id="nationality-box1"></div>
-                        <div class="box" id="team-box1"></div>
-                        <div class="box" id="position-box1"></div>
-                        <div class="box" id="age-box1"></div>
-                        <div class="box" id="shirt-num-box1"></div>
-                    </div>
-                </div>
-                <div class="container" id="label-boxes">
-                    <div class="label-box" id="nationality-label">אזרחות</div>
-                    <div class="label-box" id="team-label">קבוצה</div>
-                    <div class="label-box" id="position-label">עמדה</div>
-                    <div class="label-box" id="age-label">גיל</div>
-                    <div class="label-box" id="shirt-num-label">חולצה</div>
-                </div> -->
             </div>
 
         </div>

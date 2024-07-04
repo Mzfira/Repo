@@ -13,6 +13,9 @@ html {
     font-style: normal;
     font-size: 20px;
 }
+body {
+    height: 100vh;
+}
 
 @keyframes boxFlipRight {
     from {
@@ -85,18 +88,24 @@ html {
     color: white;
 }
 
-/* .wrong-guess {
-    display: none;
-} */
+.match {
+    display: block;
+    padding: 2px;
+}
+
+.match:focus {
+    background-color: antiquewhite;
+    cursor:pointer;
+}
+.match:hover {
+    background-color: antiquewhite;
+    cursor:pointer;
+}
 
 #header-logo-link {
     font-size: 3rem;
-    color: white;
+    color: rgb(255, 4, 4);
     text-decoration-line: none;
-}
-
-#aria-autocomplete {
-    background-color: white;
 }
 
 #player-card-img {
@@ -106,6 +115,8 @@ html {
 
 #guess-form {
     display: flex;
+    margin-left: 50px;
+    padding: 10px;
 }
 
 #guess-box {
@@ -114,4 +125,23 @@ html {
     margin-right: 56px;
     text-align: right;
 
+}
+#ac-box {
+    display: block;
+    margin-right: 56px ;
+    background-color: white;
+    flex-direction: column;
+    margin-left: 0px;
+    margin-right: 56px;
+    overflow-y: scroll;
+    height: 120px;
+    z-index: 1;
+}
+
+#guess-box-wrapper {
+    flex-direction: column;
+    min-height: 1rem;
+    font-size: 1rem;
+    margin-right: 56px;
+    text-align: right;
 }
