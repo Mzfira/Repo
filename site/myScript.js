@@ -1,31 +1,57 @@
 let guessCounter = 1;
+let originTxt = "";
 const sub = document.getElementById("guess-submit");
 const guessBox = document.getElementById("guess-box");
 const wrongGuesses = document.getElementById("wrong-guesses");
 const guessWrapper = document.getElementById("guess-box-wrapper");
 const pDB = new Map([
-    ["Ofir Marciano", ["Israel", "MSA", "GK", "33", "1"]],
-    ["Miguel Vítor", ["Portugal", "HBS", "DF", "33", "4"]],
-    ["Sheran Yeini", ["Israel", "MTA", "DF", "36", "21"]],
-    ["Lior Refaelov", ["Israel", "MHDR", "MF", "37", "10"]],
-    ["Dan Einbinder", ["Israel", "HTA", "MF", "34", "8"]],
-    ["Eyad Hutba", ["Israel", "MBR", "DF", "29", "18"]],
-    ["Ram Levy", ["Israel", "HPT", "MF", "27", "23"]],
-    ["Yonas Malede", ["Israel", "BJFC", "FW", "23", "9"]],
-    ["Mohammed Hindy", ["Israel", "MPT", "DF", "24", "4"]],
-    ["Ofek Bitton", ["Israel", "HJE", "MF", "22", "6"]],
-    ["Tomer Josefi", ["Israel", "HPFC", "MF", "25", "17"]],
-    ["Aviv Avraham", ["Israel", "MNT", "MF", "27", "19"]],
-    ["Maroun Gantous", ["Israel", "BNS", "DF", "25", "5"]],
-    ["Barak Bachar", ["Israel", "MHDR", "Man Ar", "43", ""]],
-    ["Eli Dasa", ["Israel", "MHDR", "DF", "30", "2"]],
-    ["Omer Atzili", ["Israel", "MHDR", "FW", "29", "7"]],
-    ["Neta Lavi", ["Israel", "MHDR", "MF", "27", "6"]],
-    ["Eylon Almog", ["Israel", "MTA", "FW", "23", "17"]],
-    ["Dan Glazer", ["Israel", "MTA", "MF", "26", "6"]],
-    ["Stipe Perica", ["Croatia", "MTA", "FW", "28", "99"]],
-    ["Eran Zahavi", ["Israel", "MTA", "FW", "35", "7"]],
-    ["Ben Bitton", ["Israel", "HTA", "DF", "31", "2"]],
+    ["אופיר מרציאנו", ["il", "Ashdod", "GK", "33", "1"]],
+    ["מיגל ויטור", ["pt", "HBS", "DF", "33", "4"]],
+    ["שרן ייני", ["il", "MTA", "DF", "36", "21"]],
+    ["ליאור רפאלוב", ["il", "MHA", "MF", "37", "10"]],
+    // ["דן איינבדר", ["il", "HTA", "MF", "34", "8"]],
+    ["עיאד חוטבה", ["il", "Reineh", "DF", "29", "18"]],
+    // ["רם לוי", ["il", "HPT", "MF", "27", "23"]],
+    ["יונס מלדה", ["il", "BJFC", "FW", "23", "9"]],
+    ["מוחמד הינדי", ["il", "MPT", "DF", "24", "4"]],
+    ["אופק ביטון", ["il", "HJE", "MF", "22", "6"]],
+    ["תומר יוספי", ["il", "HapoelHaifa", "MF", "25", "17"]],
+    ["אביב אברהם", ["il", "MNT", "MF", "27", "19"]],
+    ["מראון גנטוס", ["il", "Sakhnin", "DF", "25", "5"]],
+    ["אלי דסה", ["il", "Hedera", "DF", "30", "2"]],
+    ["עומר אצילי", ["il", "Hedera", "FW", "29", "7"]],
+    ["נטע לביא", ["il", "Hedera", "MF", "27", "6"]],
+    ["אילון אלמוג", ["il", "MTA", "FW", "23", "17"]],
+    ["דן גלזר", ["il", "MTA", "MF", "26", "6"]],
+    ["ערן זהבי", ["il", "MTA", "FW", "35", "7"]],
+    // ["בן ביטון", ["il", "HTA", "DF", "31", "2"]],
+])
+let pToday = "אופיר מרציאנו";
+let today = pDB.get(pToday);
+const cDB = new Map([
+    ["pt", "פורטוגל"],
+    ["il", "ישראל"]
+])
+const fDB = new Map([
+    ["pt", "pt.svg"],
+    ["il", "il.svg"]
+])
+
+const tDB = new Map([
+    ["Ashdod", ["Ashdod.webp", "אשדוד"]],
+    ["HBS", ["HBS.webp", "הפועל באר שבע"]],
+    ["MTA", ["MTA.webp", "מכבי תל אביב"]],
+    ["BJFC", ["BJFC.webp", "בית&quotר ירושלים"]],
+    ["HapoelHaifa", ["HapoelHaifa.webp", "הפועל חיפה"]],
+    ["Sakhnin", ["Sakhnin.webp", "בני סכנין"]],
+    ["Hedera", ["Hedera.webp", "הפועל חדרה"]],
+    ["MNT", ["MNT.webp", "מכבי נתניה"]],
+    ["MPT", ["MPT.webp", "מכבי פתח תקווה"]],
+    ["HJE", ["HJE.webp", "הפועל ירושלים"]],
+    ["KiryatShmona", ["KiryatShmona.webp", "עירוני קריית שמונה"]],
+    ["Tiberiya", ["Tiberiya.webp", "עירוני טבריה"]],
+    ["Reineh", ["Reineh.webp", "מכבי בני ריינה"]],
+    ["MHA", ["MHA.webp", "מכבי חיפה"]]
 ])
 window.addEventListener("keydown", (eve) => {
     // eve.preventDefault();
@@ -35,7 +61,7 @@ window.addEventListener("keydown", (eve) => {
         eve.preventDefault();
         const newFcs = fcs.parentElement.lastElementChild.firstElementChild.nextElementSibling;
         newFcs.focus();
-
+        originTxt = guessBox.value;
         guessBox.value = newFcs.innerHTML;
     }
     if ((key === "ArrowDown" || key === "Tab") && fcs.getAttribute("class") == "match no-hover") {
@@ -50,7 +76,7 @@ window.addEventListener("keydown", (eve) => {
         eve.preventDefault();
         if (fcs.previousElementSibling.getAttribute("class") == "no-match") {
             guessBox.focus();
-            guessBox.value = "";
+            guessBox.value = originTxt;
         }
         else {
             const newFcs = fcs.previousElementSibling;
@@ -58,8 +84,11 @@ window.addEventListener("keydown", (eve) => {
             guessBox.value = newFcs.innerHTML;
         }
     }
-    if (key === "Enter" && fcs.getAttribute("class") == "match no-hover") {
-        guessBox.focus();
+    if (key === "Enter") {
+        if (fcs.getAttribute("class") == "match no-hover")
+            guessBox.focus();
+        if (fcs.getAttribute("id") == "guess-box" && document.getElementsByClassName("match").length == 1)
+            guessBox.value = document.getElementsByClassName("match")[0].innerHTML;
     }
 })
 guessBox.addEventListener("input", (ev) => {
@@ -83,9 +112,10 @@ function autoComp(val) {
     const ac = Object.assign(document.createElement("div"), { className: "container", id: "ac-box" });
     ac.addEventListener("mousemove", focusedThenHover, false);
     const nomatch = Object.assign(document.createElement("div"), { className: "no-match" });
-    ac.appendChild(nomatch);
     const matches = posMatches(val, pDB);
-    // const matches = ["ערן זהבי", "אבי נמני", "יניב קטן", "דקל קינן", "אייל גולסה"]
+    if (matches.length == 0)
+        nomatch.innerHTML = "לא נמצא שחקן";
+    ac.appendChild(nomatch);
     for (x in matches) {
         const match = Object.assign(document.createElement("div"), { className: "match", innerHTML: matches[x] });
         match.setAttribute("tabindex", "0");
@@ -101,10 +131,9 @@ function autoComp(val) {
 
     }
 }
-function posMatches(val, db)
-{   
+function posMatches(val, db) {
     const mtch = [];
-    for(const x of db.keys()) {
+    for (const x of db.keys()) {
         if (x.toString().includes(val)) {
             mtch.push(x.toString());
         }
@@ -131,14 +160,32 @@ function hoverAct() {
         matchesSelectors[i].setAttribute("class", "match");
     }
 }
+function gueesCheck(val) {
+    const rightWrong = [];
+    for (var i = 0; i < 3; i++) {
+        if (today[i] == pDB.get(val)[i])
+            rightWrong[i] = "Right";
+        else
+            rightWrong[i] = "Wrong";
+    }
+    for (var i = 3; i < 5; i++) {
+        if (today[i] == pDB.get(val)[i])
+            rightWrong[i] = "Right";
+        else if (today[i] > pDB.get(val)[i])
+            rightWrong[i] = "WrongUp";
+        else 
+            rightWrong[i] = "WrongDown";
 
+    }
+    return rightWrong;
+}
 sub.addEventListener("click", (e) => {
     let val = guessBox.value;
     e.preventDefault();
     try {
-        if (!(pDB.has(val))) throw "לא נמצא שחקן";
+        if (!(pDB.has(val))) throw "exit";
         labelsCreate(guessCounter);
-        boxesCreate();
+        boxesCreate(val);
         nameCreate(guessCounter, val);
         guessCounter++;
         if (guessWrapper.lastElementChild.getAttribute("id") === "ac-box") {
@@ -146,8 +193,8 @@ sub.addEventListener("click", (e) => {
             rmv.remove();
         }
     }
-    catch(err) {
-        document.getElementsByClassName("no-match")[0].innerHTML = err;
+    catch (err) {
+
     }
 }
 );
@@ -165,13 +212,36 @@ function labelsCreate(x) {
     }
 };
 
-function boxesCreate() {
+function boxesCreate(val) {
+    const rightWrong = gueesCheck(val);
+    let i = 0;
     const boxes = Object.assign(document.createElement("div"), { className: "container" });
-    const natBox = Object.assign(document.createElement("div"), { className: "box", style: "animation-name: boxFlipWrong; animation-delay: 0.2s;" });
-    const teamBox = Object.assign(document.createElement("div"), { className: "box", style: "animation-name: boxFlipWrong; animation-delay: 0.7s;" });
-    const posBox = Object.assign(document.createElement("div"), { className: "box", style: "animation-name: boxFlipWrong; animation-delay: 1.2s;" });
-    const ageBox = Object.assign(document.createElement("div"), { className: "box", style: "animation-name: boxFlipWrong; animation-delay: 1.7s;" });
-    const shirtBox = Object.assign(document.createElement("div"), { className: "box", style: "animation-name: boxFlipWrong; animation-delay: 2.2s;" });
+    const natBox = Object.assign(document.createElement("div"), {
+        className: "box", style: "animation-delay: 0.2s;",
+        innerHTML: "<div class='nat-box'><img src='images/flags/" + fDB.get(pDB.get(val)[i]) + "' border='2.5' alt='" + cDB.get(pDB.get(val)[i]) + "' width='59' height='45' ></div>"
+    });
+    natBox.style.animationName = "boxFlip" + rightWrong[i]; i++;
+    const teamBox = Object.assign(document.createElement("div"), {
+        className: "box", style: "animation-delay: 0.7s;",
+        innerHTML: "<div class='team-box'><img src='images/teams/" + tDB.get(pDB.get(val)[i])[0] + "' alt='" + tDB.get(pDB.get(val)[i])[1] +
+            "' width='60' height='60'></div>"
+    });
+    teamBox.style.animationName = "boxFlip" + rightWrong[i]; i++;
+    const posBox = Object.assign(document.createElement("div"), {
+        className: "box ", style: "animation-delay: 1.2s;",
+        innerHTML: "<div class='pos-box'>" + pDB.get(val)[i] + "</div>"
+    });
+    posBox.style.animationName = "boxFlip" + rightWrong[i]; i++;
+    const ageBox = Object.assign(document.createElement("div"), {
+        className: "box ", style: "animation-delay: 1.7s;",
+        innerHTML: "<div class='age-box'>" + pDB.get(val)[i] + "</div>"
+    });
+    ageBox.style.animationName = "boxFlip" + rightWrong[i]; i++;
+    const shirtBox = Object.assign(document.createElement("div"), {
+        className: "box ", style: "animation-delay: 2.2s;",
+        innerHTML: "<div class='shirt-box'>" + pDB.get(val)[i] + "</div>"
+    });
+    shirtBox.style.animationName = "boxFlip" + rightWrong[i]; i++;
     boxes.append(natBox, teamBox, posBox, ageBox, shirtBox);
     wrongGuesses.insertBefore(boxes, wrongGuesses.firstElementChild);
 };
@@ -189,5 +259,9 @@ function nameCreate(x, val) {
         * autocomplete box to be over the guesses
         * hovering makes arrow down,up or tab move from the last hovered
         * close autocomplete box after clicking somewhere else
-        * close ac box after guess box has been emptied with arrow up
+        * -"-    -"-     -"-      -"-  pressing the esc key
+        * pressing backspace focuses on guess box and deletes value (?)
+        * close ac box after choosing a player
+        * remove players from ac box and from mathces array after guessing
+        * right guess animations, stoping beign able to guess
 */
