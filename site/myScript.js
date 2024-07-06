@@ -25,6 +25,29 @@ const pDB = new Map([
     ["דן גלזר", ["il", "MTA", "MF", "26", "6"]],
     ["ערן זהבי", ["il", "MTA", "FW", "35", "7"]],
     // ["בן ביטון", ["il", "HTA", "DF", "31", "2"]],
+    ["מתן חוזז", ["il", "Sakhnin", "MF", "27", "11"]],
+    ["גיא מזרחי", ["il", "Sakhnin", "DF", "22", "2"]],
+    ["גיל כהן", ["il", "Hedera", "DF", "24", "3"]],
+    ["שובל גוזלן", ["il", "Hedera", "FW", "29", "9"]],
+    ["עומרי בן הרוש", ["il", "Hedera", "DF", "34", "20"]],
+    ["ממוחמד כנען", ["il", "Hedera", "MF", "22", "77"]],
+    ["רועי זיכרי", ["il", "BJFC", "FW", "29", "20"]],
+    ["אוריאל דגני", ["il", "BJFC", "DF", "34", "5"]],
+    ["תומר חמד", ["il", "BJFC", "FW", "36", "10"]],
+    ["רוי רביבו", ["il", "MPT", "DF", "23", "3"]],
+    ["אבי ריקן", ["il", "MPT", "MF", "34", "8"]],
+    ["דולב חזיזה", ["il", "HBS", "MF", "28", "10"]],
+    ["תומר אלטמן", ["il", "HBS", "MF", "23", "15"]],
+    ["רז שלמה", ["il", "HBS", "DF", "25", "5"]],
+    ["רועי קהת", ["il", "KiryatShmona", "MF", "28", "6"]],
+    ["שי בן דוד", ["il", "KiryatShmona", "DF", "27", "3"]],
+    ["ניב אנטמן", ["il", "KiryatShmona", "GK", "28", "1"]],
+    ["גיא הדר", ["il", "KiryatShmona", "FW", "25", "9"]],
+    ["תומר אהרון", ["il", "Tiberiya", "MF", "26", "8"]],
+    ["אליאל פרץ", ["il", "Tiberiya", "MF", "27", "7"]],
+    ["יוגב בורג", ["il", "Tiberiya", "DF", "29", "4"]],
+    ["גיא חפיאני", ["il", "Tiberiya", "FW", "23", "11"]],
+    ["אופיר דוידזאדה", ["il", "MTA", "DF", "30", "27"]],
 ])
 let pToday = "אופיר מרציאנו";
 let today = pDB.get(pToday);
@@ -109,18 +132,25 @@ guessBox.addEventListener("input", (ev) => {
 });
 
 function autoComp(val) {
+    let margin = 28.44;
     const ac = Object.assign(document.createElement("div"), { className: "container", id: "ac-box" });
     ac.addEventListener("mousemove", focusedThenHover, false);
     const nomatch = Object.assign(document.createElement("div"), { className: "no-match" });
     const matches = posMatches(val, pDB);
-    if (matches.length == 0)
+    if (matches.length == 0) {
         nomatch.innerHTML = "לא נמצא שחקן";
+        nomatch.style.padding = "2px";
+    }
     ac.appendChild(nomatch);
     for (x in matches) {
         const match = Object.assign(document.createElement("div"), { className: "match", innerHTML: matches[x] });
         match.setAttribute("tabindex", "0");
         ac.appendChild(match);
     }
+    if (matches.length >= 4)
+        ac.style.marginBottom = (-40 - (margin * 3)) + "px";
+    else if (matches.length != 0)
+        ac.style.marginBottom = (-40 - (margin * (matches.length - 1))) + "px";
     guessWrapper.appendChild(ac);
     var matchesSelectors = document.getElementsByClassName("match");
     for (i = 0; i < matchesSelectors.length; i++) {
@@ -173,7 +203,7 @@ function gueesCheck(val) {
             rightWrong[i] = "Right";
         else if (today[i] > pDB.get(val)[i])
             rightWrong[i] = "WrongUp";
-        else 
+        else
             rightWrong[i] = "WrongDown";
 
     }
@@ -256,7 +286,7 @@ function nameCreate(x, val) {
 };
 
 /* IDEAS:
-        * autocomplete box to be over the guesses
+        * autocomplete box to be over the guesses - DONE!
         * hovering makes arrow down,up or tab move from the last hovered
         * close autocomplete box after clicking somewhere else
         * -"-    -"-     -"-      -"-  pressing the esc key
@@ -265,3 +295,86 @@ function nameCreate(x, val) {
         * remove players from ac box and from mathces array after guessing
         * right guess animations, stoping beign able to guess
 */
+
+// ["Ofir Marciano",["il", "MSA", "GK",  "33", "1"],
+// ["Miguel Vítor",["Portugal", "HBS", "DF",  "33", "4"],
+// ["Sheran Yeini",["il", "MTA", "DF",  "36", "21"],
+// ["Lior Refaelov",["il", "MHDR", "MF",  "37", "10"],
+// ["Dan Einbinder",["il", "HTA", "MF",  "34", "8"],
+// ["Eyad Hutba",["il", "MBR", "DF",  "29", "18"],
+// ["Ram Levy",["il", "HPT", "MF",  "27", "23"],
+// ["Yonas Malede",["il", "BJFC", "FW",  "23", "9"],
+// ["Mohammed Hindy",["il", "MPT", "DF",  "24", "4"],
+// ["Ofek Bitton",["il", "HJE", "MF",  "22", "6"],
+// ["Tomer Josefi",["il", "HPFC", "MF",  "25", "17"],
+// ["Aviv Avraham",["il", "MNT", "MF",  "27", "19"],
+// ["Maroun Gantous",["il", "Sakhnin", "DF",  "25", "5"],
+// ["Barak Bachar",["il", "MHDR", "Man Ar",  "43", ""],
+// ["Eli Dasa",["il", "MHDR", "DF",  "30", "2"],
+// ["Omer Atzili",["il", "MHDR", "FW",  "29", "7"],
+// ["Neta Lavi",["il", "MHDR", "MF",  "27", "6"],
+// ["Eylon Almog",["il", "MTA", "FW",  "23", "17"],
+// ["Dan Glazer",["il", "MTA", "MF",  "26", "6"],
+// ["Stipe Perica",["Croatia", "MTA", "FW",  "28", "99"],
+// ["Eran Zahavi",["il", "MTA", "FW",  "35", "7"],
+// ["Ben Bitton",["il", "HTA", "DF",  "31", "2"],
+// 23",["Omer Damari",["il", "HTA", "FW",  "34", "16"],
+// 24",["Mahmoud Jaber",["il", "HTA", "MF",  "24", "6"],
+// 25",["Ayid Habshi",["il", "Sakhnin", "DF",  "29", "5"],
+// 26",["Matan Hozez",["il", "Sakhnin", "MF",  "27", "11"],
+// 27",["Guy Mizrahi",["il", "Sakhnin", "DF",  "22", "2"],
+// 28",["Gil Cohen",["il", "HDR", "DF",  "24", "3"],
+// 29",["Shoval Gozlan",["il", "HDR", "FW",  "29", "9"],
+// 30",["Omri Ben Harush",["il", "HDR", "DF",  "34", "20"],
+// 31",["Muhammad Kna'an",["il", "HDR", "MF",  "22", "77"],
+// 32",["Roei Zikri",["il", "BJFC", "FW",  "29", "20"],
+// 33",["Uriel Degani",["il", "BJFC", "DF",  "34", "5"],
+// 34",["Tomer Hemed",["il", "BJFC", "FW",  "36", "10"],
+// 35",["Roy Revivo",["il", "MPT", "DF",  "23", "3"],
+// 36",["Avi Rikan",["il", "MPT", "MF",  "34", "8"],
+// 37",["Dolev Haziza",["il", "HBS", "MF",  "28", "10"],
+// 38",["Tomer Altman",["il", "HBS", "MF",  "23", "15"],
+// 39",["Raz Shlomo",["il", "HBS", "DF",  "25", "5"],
+// 40",["Roy Kahat",["il", "KSH", "MF",  "28", "6"],
+// 41",["Shay Ben David",["il", "KSH", "DF",  "27", "3"],
+// 42",["Niv Antman",["il", "KSH", "GK",  "28", "1"],
+// 43",["Guy Hadar",["il", "KSH", "FW",  "25", "9"],
+// 44",["Tomer Aharon",["il", "TBS", "MF",  "26", "8"],
+// 45",["Eliel Peretz",["il", "TBS", "MF",  "27", "7"],
+// 46",["Yogev Burg",["il", "TBS", "DF",  "29", "4"],
+// 47",["Guy Hafiani",["il", "TBS", "FW",  "23", "11"],
+// 48",["Ofir Davidzada",["il", "MTA", "DF",  "30", "27"],
+// 49",["Tal Ben Haim",["il", "MTA", "FW",  "34", "11"],
+// 50",["Ben Mizrachi",["il", "MHDR", "MF",  "25", "14"],
+// 51",["Suf Podgoreanu",["il", "MHDR", "FW",  "22", "27"],
+// 52",["Nikita Rukavytsya",["Australia", "MHDR", "FW",  "35", "13"],
+// 53",["Dolev Haziza",["il", "HBS", "MF",  "27", "10"],
+// 54",["Miguel Silva",["Portugal", "HBS", "GK",  "28", "1"],
+// 55",["Sagiv Jehezkel",["il", "HBS", "FW",  "28", "30"],
+// 56",["Uri Dahan",["il", "HBS", "DF",  "24", "5"],
+// 57",["Matan Berkowitz",["il", "HPFC", "MF",  "22", "23"],
+// 58",["Eitan Tibi",["il", "HPFC", "DF",  "35", "18"],
+// 59",["Tomer Jankelowitz",["il", "HPFC", "GK",  "25", "22"],
+// 60",["Danilo Asprilla",["Colombia", "HPFC", "FW",  "34", "77"],
+// 61",["Hatem Elhamed",["il", "HPFC", "DF",  "33", "44"],
+// 62",["Gal Arel",["il", "HPFC", "MF",  "33", "6"],
+// 63",["Omer Nachmani",["il", "HPFC", "FW",  "26", "15"],
+// 64",["Eliel Peretz",["il", "TBS", "MF",  "27", "7"],
+// 65",["Or Inbrum",["il", "TBS", "FW",  "28", "10"],
+// 66",["Ya'akov Abu",["il", "TBS", "GK",  "29", "1"],
+// 67",["Shlomi Azoulay",["il", "HTA", "MF",  "29", "7"],
+// 68",["Eliezer Ilaraz",["il", "HTA", "FW",  "22", "16"],
+// 69",["Gal Kaufman",["il", "HTA", "MF",  "24", "19"],
+// 70",["Adi Tamir",["il", "HTA", "DF",  "25", "5"],
+// 71",["David Fuxman",["il", "MNT", "GK",  "21", "1"],
+// 72",["Raz Twizer",["il", "MNT", "FW",  "22", "19"],
+// 73",["Idan Shriki",["il", "MNT", "MF",  "25", "7"],
+// 74",["Shay Golan",["il", "MNT", "MF",  "27", "6"],
+// 75",["Eliran Atar",["il", "Sakhnin", "FW",  "33", "16"],
+// 76",["Itamar Nitzan",["il", "Sakhnin", "GK",  "32", "1"],
+// 77",["Osama Khalaila",["il", "Sakhnin", "FW",  "26", "7"],
+// 78",["Fadi Najar",["il", "Sakhnin", "MF",  "24", "8"],
+// 79",["Mahamadou Sissoko",["Mali", "KSH", "DF",  "30", "4"],
+// 80",["Ahmed Salman",["il", "KSH", "FW",  "23", "11"}
+//   ],
+// }
