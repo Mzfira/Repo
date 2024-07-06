@@ -48,17 +48,17 @@ const pDB = new Map([
     ["יוגב בורג", ["il", "Tiberiya", "DF", "29", "4"]],
     ["גיא חפיאני", ["il", "Tiberiya", "FW", "23", "11"]],
     ["אופיר דוידזאדה", ["il", "MTA", "DF", "30", "27"]],
-])
+]);
 let pToday = "אופיר מרציאנו";
 let today = pDB.get(pToday);
 const cDB = new Map([
     ["pt", "פורטוגל"],
     ["il", "ישראל"]
-])
+]);
 const fDB = new Map([
     ["pt", "pt.svg"],
     ["il", "il.svg"]
-])
+]);
 
 const tDB = new Map([
     ["Ashdod", ["Ashdod.webp", "אשדוד"]],
@@ -75,20 +75,23 @@ const tDB = new Map([
     ["Tiberiya", ["Tiberiya.webp", "עירוני טבריה"]],
     ["Reineh", ["Reineh.webp", "מכבי בני ריינה"]],
     ["MHA", ["MHA.webp", "מכבי חיפה"]]
-])
-window.addEventListener("keydown", (eve) => {
+]);
+window.addEventListener("click", (e) => {
+    acRemove();
+});
+window.addEventListener("keydown", (e) => {
     // eve.preventDefault();
     const fcs = document.activeElement;
-    let key = eve.key;
+    let key = e.key;
     if ((key === "ArrowDown" || key === "Tab") && fcs.getAttribute("id") == "guess-box") {
-        eve.preventDefault();
+        e.preventDefault();
         const newFcs = fcs.parentElement.lastElementChild.firstElementChild.nextElementSibling;
         newFcs.focus();
         originTxt = guessBox.value;
         guessBox.value = newFcs.innerHTML;
     }
     if ((key === "ArrowDown" || key === "Tab") && fcs.getAttribute("class") == "match no-hover") {
-        eve.preventDefault();
+        e.preventDefault();
         if (fcs.nextElementSibling != null) {
             const newFcs = fcs.nextElementSibling;
             newFcs.focus();
@@ -96,7 +99,7 @@ window.addEventListener("keydown", (eve) => {
         }
     }
     if (key === "ArrowUp" && fcs.getAttribute("class") == "match no-hover") {
-        eve.preventDefault();
+        e.preventDefault();
         if (fcs.previousElementSibling.getAttribute("class") == "no-match") {
             guessBox.focus();
             guessBox.value = originTxt;
@@ -113,14 +116,30 @@ window.addEventListener("keydown", (eve) => {
         if (fcs.getAttribute("id") == "guess-box" && document.getElementsByClassName("match").length == 1)
             guessBox.value = document.getElementsByClassName("match")[0].innerHTML;
     }
-})
-guessBox.addEventListener("input", (ev) => {
+    if (key === "Escape") {
+        e.preventDefault();
+        acRemove();
+        guessBox.focus();
+    }
+});
+guessBox.addEventListener("click", (e) => {
+    e.preventDefault();
+    guessBox.focus();
+    let val = guessBox.value;
+    acRemove();
+    switch (val.length) {
+        case 0:
+        case 1:
+            break;
+        default:
+            autoComp(val);
+    }
+
+});
+guessBox.addEventListener("input", (e) => {
 
     let val = guessBox.value;
-    if (guessWrapper.lastElementChild.getAttribute("id") === "ac-box") {
-        const rmv = guessWrapper.lastElementChild;
-        rmv.remove();
-    }
+    acRemove();
     switch (val.length) {
         case 0:
         case 1:
@@ -173,6 +192,13 @@ function posMatches(val, db) {
 function selectFromAC() {
     guessBox.value = this.innerHTML;
     guessBox.focus();
+    acRemove();
+}
+function acRemove() {
+    if (guessWrapper.lastElementChild.getAttribute("id") === "ac-box") {
+        const rmv = guessWrapper.lastElementChild;
+        rmv.remove();
+    }
 }
 function focusedThenHover() {
     guessBox.focus();
@@ -218,10 +244,7 @@ sub.addEventListener("click", (e) => {
         boxesCreate(val);
         nameCreate(guessCounter, val);
         guessCounter++;
-        if (guessWrapper.lastElementChild.getAttribute("id") === "ac-box") {
-            const rmv = guessWrapper.lastElementChild;
-            rmv.remove();
-        }
+        acRemove();
     }
     catch (err) {
 
@@ -287,13 +310,14 @@ function nameCreate(x, val) {
 
 /* IDEAS:
         * autocomplete box to be over the guesses - DONE!
-        * hovering makes arrow down,up or tab move from the last hovered
-        * close autocomplete box after clicking somewhere else
-        * -"-    -"-     -"-      -"-  pressing the esc key
-        * pressing backspace focuses on guess box and deletes value (?)
-        * close ac box after choosing a player
+        * -"-    -"-     -"-      -"-  pressing the esc key - DONE!
+        * close ac list after choosing a player - DONE!
+        * close autocomplete box after clicking somewhere else - DONE!
         * remove players from ac box and from mathces array after guessing
-        * right guess animations, stoping beign able to guess
+        * clicking on guess box after closing the ac list creates new ac list - window click happens after guess box click and makes the list close...
+        * hovering makes arrow down,up or tab move from the last hovered
+        * pressing backspace focuses on guess box and deletes value (?)
+        * right guess animations, what will happen after?
 */
 
 // ["Ofir Marciano",["il", "MSA", "GK",  "33", "1"],
